@@ -1,5 +1,18 @@
+# Amber Mavenizer
 
-# Minecraft Mavenizer
+A fork of [Minecraft Mavenizer](https://github.com/MinecraftForge/MinecraftMavenizer) that takes less disk space when you build several mods or Minecraft versions on one machine.
+
+What's different:
+
+- Artifacts in the output repository are hard links to the cache instead of copies, when the file system allows it.
+- Outputs are deleted before they're regenerated, so a step that writes its output in place can't change a linked copy.
+- Decompiler logs are deleted after a successful run.
+
+It's published as `com.iamkaf.amber.toolchain:amber-mavenizer` on `https://maven.kaf.sh`. ForgeGradle 7 can use it through its `fgtools` extension. Changes that would help everyone go back to Minecraft Mavenizer when they're ready.
+
+The original Minecraft Mavenizer readme follows.
+
+## Minecraft Mavenizer
 
 A pure-blooded Java tool to generate a maven repository for Minecraft artifacts.
 

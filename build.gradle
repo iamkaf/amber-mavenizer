@@ -14,10 +14,11 @@ plugins {
     alias libs.plugins.shadow
 }
 
-gradleutils.displayName = 'Minecraft Mavenizer'
+gradleutils.displayName = 'Amber Mavenizer'
 description = 'A pure-blooded Java tool to generate a maven repository for Minecraft artifacts.'
-group = 'net.minecraftforge'
-version = gitversion.tagOffset
+group = 'com.iamkaf.amber.toolchain'
+// Amber Mavenizer versions are the Minecraft Mavenizer release they are based on plus an Amber build number
+version = '0.5.22+amber.1'
 
 println "Version: $version"
 

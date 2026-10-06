@@ -2,7 +2,7 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 
-rootProject.name = 'minecraft-mavenizer'
+rootProject.name = 'amber-mavenizer'
 
 // Applying plugins causes them to not have any IDE support when also applied to any build.gradle files
 // The workaround for now is to use this listener here so that it can stay in settings.gradle
