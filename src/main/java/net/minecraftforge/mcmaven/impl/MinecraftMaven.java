@@ -463,13 +463,25 @@ public record MinecraftMaven(
                     makeNonGradlePom(source, target);
                 } else {
                     FileUtils.ensureParent(target);
-                    Files.copy(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    linkOrCopy(source, target);
                 }
                 HashUtils.updateHash(target);
                 cache.save();
             } catch (Throwable t) {
                 throw new RuntimeException("Failed to generate artifact: %s".formatted(artifact), t);
             }
+        }
+    }
+
+    /// Artifacts are built in the cache, so hard-link them into the output repository instead of
+    /// keeping a second copy in every project. Falls back to copying across volumes.
+    static void linkOrCopy(File source, File target) throws IOException {
+        var targetPath = target.toPath();
+        Files.deleteIfExists(targetPath);
+        try {
+            Files.createLink(targetPath, source.toPath());
+        } catch (UnsupportedOperationException | IOException e) {
+            Files.copy(source.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
         }
     }
 
