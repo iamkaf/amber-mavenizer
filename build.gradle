@@ -85,7 +85,14 @@ changelog {
 
 publishing {
     repositories {
-        maven gradleutils.publishingForgeMaven
+        maven {
+            name = 'KafMaven'
+            url = 'https://z.kaf.sh/releases'
+            credentials {
+                username = System.getenv('MAVEN_PUBLISH_USERNAME')
+                password = System.getenv('MAVEN_PUBLISH_PASSWORD')
+            }
+        }
     }
 
     publications.register('mavenJava', MavenPublication) {
@@ -98,7 +105,11 @@ publishing {
             name = gradleutils.displayName
             description = project.description
 
-            gradleutils.pom.addRemoteDetails(pom)
+            url = 'https://github.com/iamkaf/amber-mavenizer'
+            scm {
+                url = 'https://github.com/iamkaf/amber-mavenizer'
+                connection = 'scm:git:https://github.com/iamkaf/amber-mavenizer.git'
+            }
 
             licenses {
                 license gradleutils.pom.licenses.LGPLv2_1
