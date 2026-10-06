@@ -92,6 +92,9 @@ public final class Mavenizer {
             LOGGER.pop();
         }
         Mavenizer.assertNotCacheOnly();
+        // Some steps write their output in place, which would also change any hard link to it, so start from a new file
+        if (output.isFile())
+            output.delete();
         return false;
     }
 
