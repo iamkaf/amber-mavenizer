@@ -878,6 +878,10 @@ public class MCPTaskFactory {
         if (ret.exitCode != 0)
             throw new IllegalStateException("Failed to run MCP Step (exit code " + ret.exitCode + "), See log: " + log.getAbsolutePath());
 
+        // Decompiler logs are tens of megabytes per version and only useful when the step fails
+        if (isDecompile)
+            log.delete();
+
         cache.save();
         return output;
     }
